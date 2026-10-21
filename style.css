@@ -1,0 +1,144 @@
+:root{color-scheme:dark light;--bg:#0e1a2c;--panel:#16283f;--line:#27405e;--text:#eaf0f7;--mute:#9fb2c8;--sun:#f0b45a;--ok:#6fcf97;--bad:#ef8a8a;
+--serif:'Amiri','Traditional Arabic',serif;--sans:'Cairo','Segoe UI',Tahoma,sans-serif}
+@media (prefers-color-scheme:light){:root{--bg:#f3efe6;--panel:#fff;--line:#d9d2c3;--text:#1b2a3d;--mute:#5d6b7c;--sun:#b36a00;--ok:#1f8a4c;--bad:#b3261e}}
+*{box-sizing:border-box}
+body{margin:0;padding-top:max(16px,env(safe-area-inset-top));padding-bottom:max(48px,env(safe-area-inset-bottom));-webkit-text-size-adjust:100%;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.7;padding:16px 16px 48px}
+.wrap{max-width:1100px;margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+h1{font-family:var(--serif);font-size:1.5rem;margin:0}
+.meta,.msg{color:var(--mute);font-size:.88rem}
+.hero{text-align:center}
+.hero svg{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+.hero h2{font-family:var(--serif);font-size:clamp(2rem,6vw,3.2rem);margin:-4px 0 0;line-height:1.2}
+.hero p{margin:4px 0 0;color:var(--mute)}
+.grid{display:grid;grid-template-columns:1.7fr 1fr;gap:16px;margin-top:20px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+.panel h3{margin:0 0 10px;font-size:1.1rem;font-family:var(--serif)}
+button,.btn,select,input,textarea{font:inherit;color:inherit}
+button,.btn{background:transparent;border:1px solid var(--line);border-radius:6px;padding:6px 14px;cursor:pointer;text-decoration:none;display:inline-block}
+button:hover,.btn:hover{border-color:var(--sun)}
+.main{background:var(--sun);border-color:var(--sun);color:#16202e;font-weight:600}
+.danger{color:var(--bad)}
+:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+input[type=text],input[type=url],input[type=number],input[type=password],textarea{width:100%;background:transparent;border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+textarea{min-height:110px;resize:vertical}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tabs button.on{background:var(--sun);color:#16202e;border-color:var(--sun)}
+.tabs button.today::after{content:" •"}
+.current{border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:12px}
+.current .t{font-family:var(--serif);font-size:1.35rem;margin:0 0 10px}
+.eps{display:grid;gap:4px;max-height:260px;overflow:auto}
+.ep{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:6px;padding:4px 8px}
+.ep.cur{border-color:var(--sun)}
+.ep.done .n{color:var(--ok)}
+.ep .nm{flex:1;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.timer{font-size:2.4rem;font-family:var(--serif);text-align:center;font-variant-numeric:tabular-nums}
+.week{display:grid;gap:6px}
+.week div{display:flex;justify-content:space-between;gap:8px;font-size:.92rem;padding:2px 0}
+.week .today{color:var(--sun);font-weight:600}
+#mgr{margin-top:20px}
+.mgrid{display:grid;grid-template-columns:220px 1fr;gap:16px}
+@media(max-width:700px){.mgrid{grid-template-columns:1fr}}
+.slist{display:grid;gap:6px;align-content:start}
+.slist button.on{border-color:var(--sun)}
+label.f{display:block;margin:10px 0 3px;font-size:.9rem;color:var(--mute)}
+.days{display:flex;gap:6px;flex-wrap:wrap}
+.days label{border:1px solid var(--line);border-radius:6px;padding:2px 10px;cursor:pointer}
+.edrow{display:grid;grid-template-columns:28px 1fr 1.4fr auto;gap:6px;margin-bottom:6px;align-items:center}
+@media(max-width:700px){.edrow{grid-template-columns:24px 1fr auto}.edrow .u{grid-column:2/4}}
+.errs{color:var(--bad);font-size:.88rem;margin-top:6px}
+[hidden]{display:none!important}
+.keybox{border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:14px}
+.keybox label.f{margin-top:0}
+.keybox ol{margin:6px 0;padding-inline-start:20px}
+.ok{color:var(--ok)}
+
+
+/* ===== التتبّع الأسبوعي ===== */
+.wk{margin-top:20px}
+.wkhead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.wkhead h3{margin:0}
+.wknav{display:flex;align-items:center;gap:8px}
+.wknav button{min-width:40px;min-height:40px;padding:0;font-size:1.3rem;line-height:1}
+.wknav button:disabled{opacity:.35;cursor:default}
+.wklabel{display:grid;text-align:center;min-width:120px;line-height:1.3}
+.bar{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--sun);border-radius:99px;transition:width .4s}
+.bar.ok span{background:var(--ok)}
+.wkbar{display:flex;align-items:center;gap:10px;margin:12px 0}
+.wkdays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.dc{border:1px solid var(--line);border-radius:8px;padding:8px 4px;text-align:center;min-width:0;display:grid;gap:2px;align-content:start}
+.dc .dn{font-weight:600;font-size:.9rem}
+.dc .dn .s{display:none}
+.dc .dd{font-size:.78rem;color:var(--mute)}
+.dc .st{font-size:1.4rem;line-height:1.2;min-height:1.7rem}
+.dc .sv{font-size:.72rem;color:var(--mute);line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.dc.ok{border-color:var(--ok)}.dc.ok .st{color:var(--ok)}
+.dc.miss .st{color:var(--bad)}
+.dc.now{border-color:var(--sun);box-shadow:0 0 0 1px var(--sun) inset}
+.dc.now .st{color:var(--sun)}
+.dc.soon,.dc.off{opacity:.65}
+.wkseries{display:grid;gap:8px;margin-top:14px}
+.sr{display:grid;grid-template-columns:minmax(110px,1.2fr) 2fr auto;gap:10px;align-items:center;font-size:.92rem}
+.sr .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ===== التجاوب ===== */
+button,.btn{min-height:38px}
+@media(max-width:700px){
+  .tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .tabs button{white-space:nowrap;flex:0 0 auto}
+  .panel{padding:12px}
+  .current .t{font-size:1.15rem}
+  .current .row>*{flex:1 1 100%;text-align:center}
+}
+@media(max-width:560px){
+  body{padding-inline:10px}
+  .wkdays{gap:4px}
+  .dc{padding:6px 2px}
+  .dc .dn .f{display:none}.dc .dn .s{display:inline}
+  .dc .dn{font-size:.78rem}
+  .dc .sv{display:none}
+  .sr{grid-template-columns:1fr auto}
+  .sr .bar{grid-column:1/-1;order:3}
+  header .row{width:100%}
+  header .row button{flex:1}
+  .timer{font-size:2rem}
+}
+@media(min-width:1200px){.wrap{max-width:1180px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ===== المشغّل المضمّن ===== */
+.video{position:relative;aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden;margin-bottom:12px}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* ===== مهام اليوم والإحصاء ===== */
+.t.ok{color:var(--ok)}
+.current details{margin-top:10px}
+.current details summary{cursor:pointer}
+input[type=date]{background:transparent;border:1px solid var(--line);border-radius:6px;padding:4px 8px;min-height:38px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin:12px 0}
+.tile{border:1px solid var(--line);border-radius:8px;padding:10px 6px;text-align:center;display:grid;gap:2px}
+.tile b{font-family:var(--serif);font-size:1.7rem;line-height:1.2;color:var(--sun)}
+.stmap{display:flex;flex-wrap:wrap;gap:4px;margin:10px 0}
+.cell{width:14px;height:14px;border-radius:3px;background:var(--line);display:inline-block;vertical-align:middle}
+.cell.ok{background:var(--ok)}.cell.miss{background:var(--bad)}.cell.now{background:var(--sun)}
+@media(min-width:601px) and (max-width:900px){.grid>aside{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.cell{width:11px;height:11px}.tiles{grid-template-columns:repeat(2,1fr)}.wkhead label{width:100%}}
+
+/* ===== تنظيف الرأس والبطاقات ===== */
+header button{white-space:nowrap}
+main.panel{background:transparent;border:0;padding:0;display:grid;gap:12px;align-content:start}
+.current{background:var(--panel);margin-bottom:0}
+@media(max-width:560px){
+  header .row{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  header .row .meta{grid-column:1/-1}
+  header button{padding:6px 8px;font-size:.88rem}
+}
+
+/* ===== الدخول ===== */
+.authbox{min-height:80vh;display:grid;place-items:center}
+.authbox form{width:min(380px,100%)}
+.authbox h1{margin:0 0 4px}
+@media(max-width:560px){header .row .msg{grid-column:1/-1}}

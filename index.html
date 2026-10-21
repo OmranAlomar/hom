@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>منصة البكور لطلب العلم الشرعي</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="authbox" id="auth" hidden>
+  <form class="panel" id="authForm" autocomplete="on">
+    <h1>منصة البكور</h1>
+    <p class="msg" id="authMode">تسجيل الدخول</p>
+    <label class="f" for="au">اسم المستخدم</label>
+    <input type="text" id="au" dir="ltr" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+    <label class="f" for="ap">كلمة المرور</label>
+    <input type="password" id="ap" dir="ltr" autocomplete="current-password" required>
+    <div id="invWrap" hidden><label class="f" for="ai">رمز الدعوة</label><input type="text" id="ai" dir="ltr" autocomplete="off"></div>
+    <div class="errs" id="authErr" role="alert"></div>
+    <div class="row" style="margin-top:14px"><button class="main" type="submit" id="authSubmit">دخول</button>
+    <button type="button" id="authSwitch">حساب جديد؟ (برمز دعوة)</button></div>
+  </form>
+</div>
+<div class="wrap" id="appRoot" hidden>
+<header>
+  <h1>منصة البكور لطلب العلم الشرعي</h1>
+  <div class="row"><span class="meta" id="dateLine"></span><span class="meta" id="userChip"></span><span class="msg" id="syncState"></span><button id="modeBtn"></button><button id="logoutBtn">خروج</button><button id="mgrBtn">إدارة السلاسل والروابط</button></div>
+</header>
+
+<section class="hero">
+  <svg viewBox="0 0 520 175" aria-hidden="true">
+    <path d="M50 150 A210 120 0 0 1 470 150" fill="none" stroke="var(--line)" stroke-width="2" stroke-dasharray="4 6"/>
+    <path id="arcDone" d="M50 150 A210 120 0 0 1 470 150" fill="none" stroke="var(--sun)" stroke-width="3" pathLength="100" stroke-dasharray="0 100"/>
+    <line x1="10" y1="150" x2="510" y2="150" stroke="var(--line)" stroke-width="2"/>
+    <circle id="sun" cx="50" cy="150" r="13" fill="var(--sun)"/>
+  </svg>
+  <h2 id="subject"></h2>
+  <p id="subjectDesc"></p>
+</section>
+
+<div class="grid">
+  <main class="panel">
+    <div id="body"></div>
+  </main>
+  <aside style="display:grid;gap:16px;align-content:start">
+    <div class="panel">
+      <h3>مؤقت الورد</h3>
+      <div class="timer" id="clock">90:00</div>
+      <div class="row" style="justify-content:center;margin-top:8px">
+        <button class="main" id="tStart">ابدأ</button>
+        <button id="tReset">إعادة</button>
+      </div>
+      <div class="msg" id="hourMsg" style="text-align:center"></div>
+    </div>
+    <div class="panel">
+      <h3>فوائد اليوم</h3>
+      <textarea id="notes" placeholder="اكتب ما استفدته من المقطع…"></textarea>
+      <div class="msg" id="saved"></div>
+    </div>
+  </aside>
+</div>
+
+<section class="panel wk" aria-labelledby="wkTitle">
+  <div class="wkhead">
+    <h3 id="wkTitle">تتبّع التقدّم الأسبوعي</h3>
+    <div class="wknav">
+      <button id="wkPrev" aria-label="الأسبوع السابق">‹</button>
+      <div class="wklabel"><b id="wkLabel"></b><span class="msg" id="wkRange"></span></div>
+      <button id="wkNext" aria-label="الأسبوع التالي">›</button>
+    </div>
+  </div>
+  <div class="wkbar"><div class="bar"><span id="wkFill"></span></div><span class="msg" id="wkText"></span></div>
+  <div class="wkdays" id="wkDays" role="list"></div>
+  <div class="wkseries" id="wkSeries"></div>
+  <div class="msg" id="streak"></div>
+</section>
+
+<section class="panel wk" aria-labelledby="stTitle">
+  <div class="wkhead">
+    <h3 id="stTitle">الإحصاء منذ البداية</h3>
+    <label class="row msg">تاريخ البداية <input type="date" id="startDate"></label>
+  </div>
+  <div class="tiles" id="tiles"></div>
+  <div class="stmap" id="stMap" role="img" aria-label="خريطة أيام الالتزام"></div>
+  <div class="msg"><i class="cell ok"></i> منجز &nbsp; <i class="cell miss"></i> فائت &nbsp; <i class="cell now"></i> اليوم &nbsp; <i class="cell"></i> بلا ورد</div>
+</section>
+
+<section class="panel" id="mgr" hidden>
+  <h3>إدارة السلاسل والروابط</h3>
+  <div class="keybox">
+    <label class="f" for="apiKey">مفتاح YouTube Data API (اختياري، أكثر ثباتاً من الخوادم المفتوحة)</label>
+    <div class="row"><input type="text" id="apiKey" dir="ltr" placeholder="AIza..." autocomplete="off" style="flex:1;min-width:220px"><button id="keySave">حفظ المفتاح</button></div>
+    <details class="msg"><summary>كيف أحصل على المفتاح مجاناً؟</summary>
+      <ol>
+        <li>افتح <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer">Google Cloud Console</a> وأنشئ مشروعاً جديداً.</li>
+        <li>من «APIs &amp; Services» ثم «Library» ابحث عن <b>YouTube Data API v3</b> وفعّلها.</li>
+        <li>من «Credentials» اختر «Create credentials» ثم «API key» وانسخ المفتاح هنا.</li>
+        <li>يُفضّل تقييد المفتاح بهذا الـ API فقط. الحصة المجانية تكفي آلاف المقاطع يومياً.</li>
+      </ol>
+      <p>بدون مفتاح تُجلب القوائم من خوادم Invidious المفتوحة، وقد تتوقف أو تتأخر. المفتاح يُحفظ في متصفحك فقط. القوائم الخاصة (Private) لا يمكن جلبها، ويجب أن تكون عامة أو غير مدرجة.</p>
+    </details>
+    <div class="msg" id="keyMsg"></div>
+  </div>
+  <div class="mgrid">
+    <div>
+      <div class="slist" id="slist"></div>
+      <button class="main" id="addSeries" style="margin-top:10px;width:100%">+ إضافة سلسلة</button>
+      <div class="row" style="margin-top:10px">
+        <button id="exportBtn">نسخة احتياطية</button>
+        <button id="importBtn">استعادة</button>
+        <input type="file" id="importFile" accept="application/json" hidden>
+      </div>
+    </div>
+    <div id="editor"></div>
+  </div>
+</section>
+</div>
+
+<script src="app.js"></script>
+<script src="auth.js"></script>
+</body>
+</html>
