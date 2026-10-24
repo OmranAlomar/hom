@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "hom",
+  "name": "DB",
   "main": "src/worker.js",
   "compatibility_date": "2025-09-01",
   "assets": {
